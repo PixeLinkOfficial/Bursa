@@ -1,9 +1,9 @@
-# Perbeha – TV rates board (Android)
+# Prpaha – TV rates board (Android)
 
 An Arabic, full-screen exchange-rate board for an Android TV:
 
 - **USD → IQD** (per 100 $), large, at the top
-- **EUR → IQD** (per 100 €) and **USD → EUR** (per 1 $) underneath
+- **EUR → IQD** (per 100 €) and **EUR → USD** (per 100 €, shown in $) underneath
 - Buy (شراء) and sell (بيع) prices for each pair, with flags, a live clock and date, and the time of the last update
 - A three-line menu button at the top right opens a side panel with **حساب المسؤول** (admin account)
 - Login: `admin` / `123`. You can change these at the top of `lib/admin.dart`.
@@ -32,7 +32,7 @@ Every time you upload changed files, GitHub builds a new APK automatically.
    You can also use a "Send files to TV" app.
 2. On the TV, open a file manager (for example *File Commander* or *X-plore* from the Play Store)
    and open the APK. Allow **Install unknown apps** when the TV asks.
-3. The app appears on the TV home screen as **Perbeha**.
+3. The app appears on the TV home screen as **Prpaha**.
 
 ## Using it with the TV remote
 

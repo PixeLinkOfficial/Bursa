@@ -7,17 +7,20 @@ import 'flags.dart';
 
 /// One currency pair shown on the board.
 class PairInfo {
-  const PairInfo(this.key, this.from, this.to, this.unitLabel);
+  const PairInfo(this.key, this.from, this.to, this.unitLabel, {this.symbol});
   final String key;
   final Currency from;
   final Currency to;
   final String unitLabel;
+
+  /// Currency sign shown next to the buy/sell numbers (only some pairs use one).
+  final String? symbol;
 }
 
 const usdIqd = PairInfo('usd_iqd', Currency.usd, Currency.iqd, 'لكل 100 دولار');
 const eurIqd = PairInfo('eur_iqd', Currency.eur, Currency.iqd, 'لكل 100 يورو');
-const usdEur = PairInfo('usd_eur', Currency.usd, Currency.eur, 'لكل 1 دولار');
-const allPairs = [usdIqd, eurIqd, usdEur];
+const eurUsd = PairInfo('eur_usd', Currency.eur, Currency.usd, 'لكل 100 يورو', symbol: r'$');
+const allPairs = [usdIqd, eurIqd, eurUsd];
 
 class Quote {
   const Quote(this.buy, this.sell);

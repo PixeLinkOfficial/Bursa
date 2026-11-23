@@ -154,7 +154,7 @@ class _Board extends StatelessWidget {
               children: [
                 Expanded(child: RateCard(pair: eurIqd, quote: data.of(eurIqd))),
                 const SizedBox(width: 26),
-                Expanded(child: RateCard(pair: usdEur, quote: data.of(usdEur))),
+                Expanded(child: RateCard(pair: eurUsd, quote: data.of(eurUsd))),
               ],
             ),
           ),
@@ -186,7 +186,7 @@ class _Header extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'PERBEHA',
+              'PRPAHA',
               textDirection: TextDirection.ltr,
               style: TextStyle(
                 fontSize: 46,
@@ -371,13 +371,17 @@ class RateCard extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Expanded(child: _Price(label: 'شراء', value: quote.buy, unit: pair.to.name, big: big)),
+                Expanded(
+                  child: _Price(label: 'شراء', value: quote.buy, unit: pair.to.name, symbol: pair.symbol, big: big),
+                ),
                 Container(
                   width: 1,
                   margin: const EdgeInsets.symmetric(vertical: 18, horizontal: 40),
                   color: AppColors.line,
                 ),
-                Expanded(child: _Price(label: 'بيع', value: quote.sell, unit: pair.to.name, big: big)),
+                Expanded(
+                  child: _Price(label: 'بيع', value: quote.sell, unit: pair.to.name, symbol: pair.symbol, big: big),
+                ),
               ],
             ),
           ),
@@ -439,15 +443,18 @@ class _UnitChip extends StatelessWidget {
 }
 
 class _Price extends StatelessWidget {
-  const _Price({required this.label, required this.value, required this.unit, required this.big});
+  const _Price({required this.label, required this.value, required this.unit, required this.big, this.symbol});
 
   final String label;
   final double? value;
   final String unit;
   final bool big;
+  final String? symbol;
 
   @override
   Widget build(BuildContext context) {
+    final numSize = big ? 168.0 : 96.0;
+    final numColor = value == null ? AppColors.muted : AppColors.text;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -464,13 +471,23 @@ class _Price extends StatelessWidget {
         FittedBox(
           fit: BoxFit.scaleDown,
           alignment: AlignmentDirectional.centerStart,
-          child: Text(
-            formatRate(value),
+          child: Text.rich(
+            TextSpan(
+              children: [
+                // e.g. "$108.50" — the sign is a bit smaller and gold so the number stays the focus.
+                if (symbol != null && value != null)
+                  TextSpan(
+                    text: symbol,
+                    style: TextStyle(fontSize: numSize * 0.72, color: AppColors.gold),
+                  ),
+                TextSpan(text: formatRate(value)),
+              ],
+            ),
             textDirection: TextDirection.ltr,
             style: TextStyle(
-              fontSize: big ? 168 : 96,
+              fontSize: numSize,
               fontWeight: FontWeight.w600,
-              color: value == null ? AppColors.muted : AppColors.text,
+              color: numColor,
               height: 1.12,
               fontFeatures: _tabular,
             ),
@@ -538,7 +555,7 @@ class MenuDrawer extends StatelessWidget {
                   Image.asset('assets/images/emblem.png', height: 44, filterQuality: FilterQuality.medium),
                   const SizedBox(width: 12),
                   const Text(
-                    'PERBEHA',
+                    'PRPAHA',
                     textDirection: TextDirection.ltr,
                     style: TextStyle(
                       fontSize: 22,
