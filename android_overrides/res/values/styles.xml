@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="perbeha_bg">#FF0C0C0D</color>
+    <!-- Dark splash with the logo instead of Flutter's default white screen -->
+    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@drawable/launch_background</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
+        <item name="android:windowBackground">@color/perbeha_bg</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
